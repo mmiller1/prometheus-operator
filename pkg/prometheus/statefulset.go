@@ -358,7 +358,9 @@ func makeStatefulSetSpec(p monitoringv1.Prometheus, c *Config, ruleConfigMapName
 	if p.Spec.ExternalURL != "" {
 		promArgs = append(promArgs, "-web.external-url="+p.Spec.ExternalURL)
 	}
-
+	if p.Spec.EnableAdminApi == "true" {
+		promArgs = append(promArgs, "-web.enable-admin-api")
+	}
 	webRoutePrefix := "/"
 	if p.Spec.RoutePrefix != "" {
 		webRoutePrefix = p.Spec.RoutePrefix
@@ -791,9 +793,9 @@ func makeStatefulSetSpec(p monitoringv1.Prometheus, c *Config, ruleConfigMapName
 				NodeSelector:                  p.Spec.NodeSelector,
 				PriorityClassName:             p.Spec.PriorityClassName,
 				TerminationGracePeriodSeconds: &terminationGracePeriod,
-				Volumes:                       volumes,
-				Tolerations:                   p.Spec.Tolerations,
-				Affinity:                      p.Spec.Affinity,
+				Volumes:     volumes,
+				Tolerations: p.Spec.Tolerations,
+				Affinity:    p.Spec.Affinity,
 			},
 		},
 	}, nil

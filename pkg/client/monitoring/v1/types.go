@@ -90,6 +90,9 @@ type PrometheusSpec struct {
 	LogLevel string `json:"logLevel,omitempty"`
 	// Interval between consecutive scrapes.
 	ScrapeInterval string `json:"scrapeInterval,omitempty"`
+	// Enable the tsdb admin API for prometheus
+	// this is potentially a security risk when enabled
+	EnableAdminApi string `json:"enableAdminApi,omitempty"`
 	// Interval between consecutive evaluations.
 	EvaluationInterval string `json:"evaluationInterval,omitempty"`
 	// The labels to add to any time series or alerts when communicating with

@@ -73,6 +73,9 @@ type PrometheusSpec struct {
 	Retention string `json:"retention,omitempty"`
 	// Interval between consecutive evaluations.
 	EvaluationInterval string `json:"evaluationInterval,omitempty"`
+	// Enable the tsdb admin API for prometheus
+	// this is potentially a security risk when enabled
+	EnableAdminApi string `json:"enableAdminApi,omitempty"`
 	// The labels to add to any time series or alerts when communicating with
 	// external systems (federation, remote storage, Alertmanager).
 	ExternalLabels map[string]string `json:"externalLabels,omitempty"`
